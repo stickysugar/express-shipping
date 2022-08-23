@@ -15,4 +15,22 @@ describe("POST /", function () {
 
     expect(resp.body).toEqual({ shipped: expect.any(Number) });
   });
+
+  test("invalid", async function () {
+    const resp = await request(app).post("/shipments").send({
+      productId: 1,
+      name: 89,
+      addr: true,
+      zip: false,
+    });
+
+    expect(resp.body.error.status).toEqual(400);
+
+    expect(resp.body.error.message).toEqual([
+			"instance.productId must be greater than or equal to 1000",
+			"instance.name is not of a type(s) string",
+			"instance.addr is not of a type(s) string",
+			"instance.zip is not of a type(s) string"
+		]);
+  });
 });

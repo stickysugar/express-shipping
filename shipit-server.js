@@ -6,10 +6,9 @@
 /** Server for shipit. */
 
 const express = require("express");
-const { NotFoundError } = require("./expressError");
+const { NotFoundError, BadRequestError } = require("./expressError");
 const cors = require("cors");
 require("colors");
-
 
 const app = new express();
 
